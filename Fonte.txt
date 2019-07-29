@@ -1,0 +1,8 @@
+https://docs.microsoft.com/pt-br/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-implemenation-entity-framework-core
+https://www.c-sharpcorner.com/article/generic-repository-pattern-in-asp-net-core/
+
+https://www.google.com/search?rlz=1C1NHXL_pt-BRBR770BR770&ei=-gU9XZjACavE5OUP16u0oAQ&q=baserepository+netcore&oq=baserepository+netcore&gs_l=psy-ab.3...850566.856077..856177...2.0..0.178.2811.1j22......0....1..gws-wiz.......0i71j0i131j0j0i67j35i39i19j35i39j0i10j0i203j0i10i203j0i30j35i304i39j0i13j0i13i30j0i22i30j33i160.-T__MW8AFv8&ved=0ahUKEwiYpdGjxtbjAhUrIrkGHdcVDUQQ4dUDCAo&uact=5
+https://codingblast.com/entity-framework-core-generic-repository/
+
+https://www.youtube.com/watch?v=IkcDpotI4lQ
+https://www.youtube.com/watch?v=hRWBAX70G1I
