@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using SuperDigital.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,21 +9,23 @@ namespace SuperDigital.Infra.Data.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        public DbContext Context { get; }
+       private readonly SqlContext context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(SqlContext _context)
         {
-            Context = context;
+            context = _context;
         }
         public void Commit()
         {
-            Context.SaveChanges();
+            context.SaveChanges();
         }
 
         public void Dispose()
         {
-            Context.Dispose();
-
+            context.Dispose();   
+        }
+        public IDbContextTransaction BeginTransaction(){ 
+            return context.Database.BeginTransaction();
         }
     }
 }

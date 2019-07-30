@@ -13,50 +13,59 @@ namespace SuperDigital.Infra.Data.Repositories
 
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        
-        private readonly sqlContext context;
-        private DbSet<T> entities;
-        string errorMessage = string.Empty;
 
-        public BaseRepository(sqlContext context)
+        protected SqlContext context;
+
+        protected DbSet<T> dbSet;
+
+        public BaseRepository(SqlContext _context)
         {
-            this.context = context;
-            entities = context.Set<T>();
+            context = _context;
+            dbSet = context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+
+        public virtual IEnumerable<T> GetAll()
         {
-            return entities.AsEnumerable();
+            return dbSet;
         }
+
         public T Get(int id)
         {
-            return entities.SingleOrDefault(s => s.Id == id);
+            return dbSet.Find(id);
         }
+
         public void Insert(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            entities.Add(entity);
+            context.Add(entity);
             context.SaveChanges();
         }
+
         public void Update(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            context.SaveChanges();
+            var entry = context.Entry(entity);
+            dbSet.Attach(entity);
+            entry.State = EntityState.Modified;
+       
         }
+
         public void Delete(T entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            entities.Remove(entity);
+            context.Remove(entity);
             context.SaveChanges();
         }
+
         public void Dispose()
         {
             context.Dispose();

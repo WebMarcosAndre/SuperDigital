@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SuperDigital.CrossCutting;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;   
 using SuperDigital.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,9 +10,9 @@ namespace SuperDigital.Infra.Data.Context
 {
 
 
-    public class sqlContext : DbContext
+    public class SqlContext : DbContext
     {
-        public sqlContext(DbContextOptions<sqlContext> options) : base(options) { }
+        public SqlContext(DbContextOptions<SqlContext> options) : base(options) { }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Conta>().ToTable("Conta");
@@ -22,9 +21,7 @@ namespace SuperDigital.Infra.Data.Context
             modelBuilder.Entity<Conta>(entity =>
             {
                 entity.HasKey(e => e.Id);
-
-                entity.Property(e => e.Saldo).IsRequired();
-
+                entity.Property(p => p.Saldo).IsRequired();
             });
 
             modelBuilder.Entity<Lancamento>(entity =>
@@ -33,12 +30,13 @@ namespace SuperDigital.Infra.Data.Context
                 entity.HasIndex(e => e.Id);
 
                 entity.Property(p => p.Id).IsRequired();
-                entity.Property(p => p.TipoOperacao).IsRequired();
+                
                 entity.Property(p => p.Valor).IsRequired();
 
                 entity.HasOne(d => d.Conta)
                 .WithMany(p => p.Lancamentos)
-                .HasForeignKey(d => d.Id);
+                .HasForeignKey(d => d.Id);  
+                
             });
         }
 

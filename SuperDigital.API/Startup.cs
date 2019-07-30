@@ -11,7 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SuperDigital.Domain.Entities;
+using SuperDigital.Domain.Interfaces.Repositories;
+using SuperDigital.Domain.Interfaces.Services;
 using SuperDigital.Infra.Data.Context;
+using SuperDigital.Infra.Data.Repositories;
+using SuperDigital.Services;
 
 namespace SuperDigital.API
 {
@@ -28,7 +33,15 @@ namespace SuperDigital.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<sqlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+            services.AddDbContext<SqlContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));
+
+            services.AddScoped<IBaseRepository<BaseEntity>, BaseRepository<BaseEntity>>();
+            services.AddScoped<ILancamentoRepository, LancamentoRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
+
+            services.AddScoped<ITransacaoBancariaService, TransacaoBancariaService>() ;
+            services.AddScoped<ILancamentoDebitoService, LancamentoDebitoService>();
+            services.AddScoped<ILancamentoCreditoService, LancamentoCreditoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

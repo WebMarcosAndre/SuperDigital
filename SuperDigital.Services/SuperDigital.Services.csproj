@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SuperDigital.Domain\SuperDigital.Domain.csproj" />
+    <ProjectReference Include="..\SuperDigital.Infra.Data\SuperDigital.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>

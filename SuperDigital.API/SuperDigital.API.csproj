@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SuperDigital.Infra.Data\SuperDigital.Infra.Data.csproj" />
+    <ProjectReference Include="..\SuperDigital.Services\SuperDigital.Services.csproj" />
   </ItemGroup>
 
 </Project>
